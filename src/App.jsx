@@ -1,35 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import TaskList from "./components/TaskList";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
+
+  function handleAddTask() {
+    if (newTask.trim() === "") return;
+    const newTaskObj = {
+      id: Date.now(),
+      text: newTask,
+      done: false,
+    };
+    setTasks([...tasks, newTaskObj]);
+    setNewTask("");
+  }
+
+  function handleToggleDone(id) {
+    setTasks(tasks.map(task =>
+      task.id === id ? { ...task, done: !task.done } : task
+    ));
+  }
+
+  function handleDeleteTask(id) {
+    setTasks(tasks.filter(task => task.id !== id));
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app-container">
+      <h1>Lista de Tarefas Inteligente</h1>
 
-export default App
+      <div className="add-task">
+        <input
+          type="text"
+          placeholder="Digite uma nova tarefa..."
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+        />
+        <button onClick={handleAddTask}>Adicionar</button>
+      </div>
+
+      <TaskList
+        tasks={tasks}
+        onToggleDone={handleToggleDone}
+        onDeleteTask={handleDeleteTask}
+      />
+    </div>
+  );
+}
