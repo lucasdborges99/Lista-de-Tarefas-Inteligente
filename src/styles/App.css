@@ -5,6 +5,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+body{
+  background: rgb(233, 233, 233);
+}
+
 .container{
   display: flex;
   flex-direction: column;
@@ -12,7 +16,7 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(135deg,rgb(233, 233, 233) 0%, rgba(238, 238, 238, 1) 50%, rgba(255, 255, 255, 1) 100%);
+  background: rgb(233, 233, 233);
 }
 
 header{
@@ -37,7 +41,8 @@ header .entradaTarefa{
   width: 100vw;
   display: flex;
   flex-direction: row;
-  justify-content: center;  
+  justify-content: center; 
+  margin-top: 10px; 
 }
 
 .entradaTarefa input{
