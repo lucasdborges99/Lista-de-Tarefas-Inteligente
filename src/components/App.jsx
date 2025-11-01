@@ -1,12 +1,11 @@
-import { useState } from 'react'
-import '.././App.css'
-import { requestFormReset } from 'react-dom'
+import { useState } from 'react';
+import '../styles/App.css';
 
-function App() {
+function App() { 
 
   return(
+    
     <div className="container">
-
       <header>
         <div className="titulo">
           <h1>Lista de Tarefas Inteligente</h1>
@@ -17,16 +16,14 @@ function App() {
             <input type="text"  placeholder='Digite sua tarefa...'/>
           </div>
           <div className="btnAddTarefa">
-            <button>Adicionar</button>
+            <button>+</button>
           </div>
         </div>
       </header>
 
-      <section>
-        <div className="listaItens">
-
-        </div>
-      </section>
+      <div className="listaItens">
+        
+      </div>
     </div>
   )
 }
