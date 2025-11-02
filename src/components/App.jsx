@@ -11,7 +11,12 @@ function App() {
   setInput(mudanca.target.value);     //elemento foi mudado e o .value pega o valor atual*/
   } 
 
-  function addTarefaNaLista(valorTarefa){      
+  function addTarefaNaLista(valorTarefa){  
+    if(valorTarefa.trim() === ''){
+      alert("Digite alguma tarefa!");
+      return;
+    }    
+
     const novaTarefa = 
     {                                                    //cria um objeto com id e o valor do input que sera o texto da tarefa
     id: Date.now(),                                      //da um id unico
@@ -20,17 +25,24 @@ function App() {
     };                                                   //pega a lista nova, deixa ela como tudo que ja tinha na listaDeTarefas(usando
     let novaLista = [...listaDeTarefas, novaTarefa];     //os ...) mais o valor do input, depois atualiza o useState passando a novaLista
     setListaDeTarefas(novaLista);                        //como parametro
+    setInput('');                                        //limpa o input
   }
 
 
-  function removerTarefaDaLista(idRemocao){                                         //pega a funcao da lista de tarefas, no parametro(que
-    setListaDeTarefas(listaDeTarefas.filter(tarefa => tarefa.id !== idRemocao));    //sera o novo useState) ele filtra para que só aparecam
+  function removerTarefaDaLista(idTarefa){                                         //pega a funcao da lista de tarefas, no parametro(que
+    setListaDeTarefas(listaDeTarefas.filter(tarefa => tarefa.id !== idTarefa));    //sera o novo useState) ele filtra para que só aparecam
   }                                                                                 //as tarefas cujo id são diferentes do idRemocao, que é o id que esta sendo passado
+
+  function marcarTarefaConcluida(idTarefa){
+    setListaDeTarefas(lista => lista.map(tarefa => 
+      tarefa.id === idTarefa ? {... tarefa, concluido: !tarefa.concluido} : tarefa
+    ));
+  }
 
   return(
       <div className='container'>
         <InputTarefa input={input} mudancaInput={mudancaInput} addTarefaNaLista={addTarefaNaLista}/>
-        <ListaItens listaDeTarefas={listaDeTarefas} removerTarefaDaLista={removerTarefaDaLista}/>
+        <ListaItens listaDeTarefas={listaDeTarefas} removerTarefaDaLista={removerTarefaDaLista} marcarTarefaConcluida={marcarTarefaConcluida}/>
       </div> 
 
   );

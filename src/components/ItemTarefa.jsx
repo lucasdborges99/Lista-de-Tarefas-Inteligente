@@ -1,13 +1,11 @@
-import App from "./App";
-
-function ItemTarefa({listaDeTarefas, removerTarefaDaLista}){
+function ItemTarefa({listaDeTarefas, removerTarefaDaLista, marcarTarefaConcluida}){
 
     return(
         <>
             {listaDeTarefas.map((tarefa) => (
-                <div  key={tarefa.id} className='item'>
+                <div  key={tarefa.id} className={tarefa.concluido ? 'item concluido' : 'item'}>
                     <div className="btnMarcarConcluida">
-                        <button></button>
+                        <button onClick={() => marcarTarefaConcluida(tarefa.id)}></button>
                     </div>
                     <div className="textoTarefa">
                         <p>{tarefa.texto}</p>

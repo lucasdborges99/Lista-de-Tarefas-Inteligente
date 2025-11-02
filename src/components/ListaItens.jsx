@@ -1,10 +1,9 @@
-import App from "./App"
 import ItemTarefa from "./ItemTarefa";
 
-function ListaItens({listaDeTarefas, removerTarefaDaLista}){
+function ListaItens({listaDeTarefas, removerTarefaDaLista, marcarTarefaConcluida}){
     return(
         <div className="listaItens">
-            <ItemTarefa listaDeTarefas={listaDeTarefas} removerTarefaDaLista={removerTarefaDaLista}/>
+            <ItemTarefa listaDeTarefas={listaDeTarefas} removerTarefaDaLista={removerTarefaDaLista} marcarTarefaConcluida={marcarTarefaConcluida}/>
         </div>
     );
 }
