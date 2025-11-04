@@ -4,6 +4,7 @@ function ItemTarefa({listaDeTarefas, removerTarefaDaLista, marcarTarefaConcluida
         <>
             {listaDeTarefas.map((tarefa) => (
                 <div  key={tarefa.id} className={tarefa.concluido ? 'item concluido' : 'item'}>
+                    <div className="cat"></div>
                     <div className="btnMarcarConcluida">
                         <button onClick={() => marcarTarefaConcluida(tarefa.id)}></button>
                     </div>

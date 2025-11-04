@@ -1,4 +1,4 @@
-function InputTarefa({input, mudancaInput, addTarefaNaLista}){
+function InputTarefa({input, mudancaInput, addTarefaNaLista, select, mudancaSelect, catColor}){
 
     return(
         <header>
@@ -10,20 +10,20 @@ function InputTarefa({input, mudancaInput, addTarefaNaLista}){
                 <div className="inputTarefa">
                     <input type="text"  placeholder='Digite sua tarefa...' value={input} onChange={mudancaInput}/>
                 <div className="categorias">
-                    <select>
-                        <option value="" hidden selected>Categoria</option>
-                        <option className="trabalho">Trabalho</option>
-                        <option className="pessoal">Pessoal</option>
-                        <option className="estudos">Estudos</option>
-                        <option className="casa">Casa</option>
-                        <option className="lazer">Lazer</option>
-                        <option className="financas">Finanças</option>
-                        <option className="projetos">Projetos</option>
+                    <select onChange={mudancaSelect} value={select} style={{color: catColor}}>
+                        <option value="" hidden>Categoria</option>
+                        <option className="trabalho" value="trabalho">Trabalho</option>
+                        <option className="pessoal" value="pessoal">Pessoal</option>
+                        <option className="estudos" value="estudos">Estudos</option>
+                        <option className="casa" value="casa">Casa</option>
+                        <option className="lazer" value="lazer">Lazer</option>
+                        <option className="financas"value="financas">Finanças</option>
+                        <option className="projetos" value="projetos">Projetos</option>
                     </select>
                 </div>
                 </div>
                 <div className="btnAddTarefa">
-                    <button onClick={() => addTarefaNaLista(input)}>+</button>
+                    <button onClick={() => addTarefaNaLista(input, select)}>+</button>
                 </div>
             </div>
         </header>
