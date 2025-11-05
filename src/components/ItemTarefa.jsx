@@ -1,5 +1,9 @@
-function ItemTarefa({listaDeTarefas, removerTarefaDaLista, marcarTarefaConcluida, /*editarTarefa*/}){
+import { use } from "react";
+import { useRef } from "react";
 
+function ItemTarefa({listaDeTarefas, removerTarefaDaLista, marcarTarefaConcluida, editarTarefa, tarefaEmEdicao, setTarefaEmEdicao, atualizarTextoEditado, mudarBotao}){
+    const inputEdicao = useRef(null);    
+    
     function mudarCorEtiqueta(categoria){
         switch(categoria){
             case 'trabalho': return 'cat trabalho';
@@ -27,6 +31,12 @@ function ItemTarefa({listaDeTarefas, removerTarefaDaLista, marcarTarefaConcluida
     
     }
 
+    function tarefaEdicao(statusEdicao){
+        if(statusEdicao === true){
+            
+        }
+    }
+
     return(
         <>
             {listaDeTarefas.map((tarefa) => (
@@ -38,10 +48,21 @@ function ItemTarefa({listaDeTarefas, removerTarefaDaLista, marcarTarefaConcluida
                         <button onClick={() => marcarTarefaConcluida(tarefa.id)}></button>
                     </div>
                     <div className="textoTarefa">
-                        <p>{tarefa.texto}</p>
+                        {tarefaEmEdicao === tarefa.id ? (
+                            <input type="text" value={tarefa.texto} 
+                            ref={inputEdicao}
+                            autoFocus={true}
+                            onChange={(mudancaInputEdicao) => atualizarTextoEditado(tarefa.id, mudancaInputEdicao.target.value)}
+                            onBlur={tarefa.texto.trim() === '' 
+                                    ? () => {alert('A sua tarefa está vazia, digite algo!'); setTimeout(() => inputEdicao.current.focus(), 50)}
+                                    : () => setTimeout(() => setTarefaEmEdicao(null), 300)}
+                            className="inputEdicao"/>
+                        ) : (
+                            <p>{tarefa.texto}</p>
+                        )}
                     </div>
                     <div className="btnExcluirEditar">
-                        <button /*onClick={() => editarTarefa(tarefa.id)}*/className="editar" >✏️</button>
+                        <button onClick={() => editarTarefa(tarefa.id)} className="editar" >{mudarBotao(tarefa.id)}</button>
                         <button  onClick={() => removerTarefaDaLista(tarefa.id)} className="excluir">🗑️</button>
                     </div>
                 </div>

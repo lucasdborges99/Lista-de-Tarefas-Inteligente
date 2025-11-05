@@ -1,15 +1,15 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
 
-body{
+body {
   background: rgb(233, 233, 233);
 }
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -19,7 +19,7 @@ body{
   background: rgb(233, 233, 233);
 }
 
-header{
+header {
   flex: 15%;
   display: flex;
   flex-direction: column;
@@ -29,38 +29,38 @@ header{
   margin-top: 3vh;
 }
 
-header .titulo{
+header .titulo {
   flex: 30%;
   width: 100vw;
   text-align: center;
   font-size: 20px;
 }
 
-header .entradaTarefa{
+header .entradaTarefa {
   flex: 70%;
   width: 100vw;
   display: flex;
   flex-direction: row;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   margin-bottom: 10px;
 }
 
-header .btnAddTarefa{
+header .btnAddTarefa {
   display: flex;
   flex-direction: row;
   height: 70%;
   justify-content: center;
 }
 
-.entradaTarefa .inputTarefa{
+.entradaTarefa .inputTarefa {
   display: flex;
   flex-direction: row;
   height: 70%;
   justify-content: center;
 }
 
-.entradaTarefa input{
+.entradaTarefa input {
   font-size: 20px;
   height: 100%;
   width: 30vw;
@@ -70,7 +70,7 @@ header .btnAddTarefa{
   font-weight: 500;
 }
 
-.entradaTarefa select{
+.entradaTarefa select {
   font-size: 20px;
   height: 100%;
   width: 10vw;
@@ -83,7 +83,7 @@ header .btnAddTarefa{
   font-weight: bold;
 }
 
-.entradaTarefa button{
+.entradaTarefa button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -102,12 +102,12 @@ header .btnAddTarefa{
   transition: all 0.3s ease;
 }
 
-.entradaTarefa button:hover{
+.entradaTarefa button:hover {
   transform: scale(1.03);
   box-shadow: rgb(4, 150, 40) 0px 1px 5px;
 }
 
-.listaItens{
+.listaItens {
   flex: 85%;
   display: flex;
   flex-direction: column;
@@ -116,25 +116,25 @@ header .btnAddTarefa{
   width: 100vw;
 }
 
-.listaItens .item{
+.listaItens .item {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 50vw;
   max-width: 50vw;
-  height: 8vh; 
+  height: 8vh;
   overflow: hidden;
   margin-bottom: 1.5vh;
   border-radius: 10px;
   background: white;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: max-height 0.5s ease;
   overflow: hidden;
   font-weight: 500;
 }
 
-.listaItens .item.concluido{
+.listaItens .item.concluido {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -145,13 +145,13 @@ header .btnAddTarefa{
   margin-bottom: 1.5vh;
   border-radius: 10px;
   background-color: rgb(76, 175, 80);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   order: 999;
   overflow: hidden;
   font-weight: 500;
 }
 
-.cat{
+.cat {
   height: 100%;
   width: 1vw;
   font-size: 20px;
@@ -162,41 +162,71 @@ header .btnAddTarefa{
   justify-content: center;
 }
 
-.cat p{
+.cat p {
   transform: translateX(6vw);
   transition: transform 0.5s ease 0.1s;
 }
 
-.cat:hover{
+.cat:hover {
   width: 9vw;
   font-weight: bold;
   font-size: 20px;
   color: white;
 }
 
-.cat:hover p{
+.cat:hover p {
   transform: translateX(0px);
 }
 
-.cat.trabalho    { background-color: rgb(35, 35, 204); }
-.cat.pessoal     { background-color: red; }
-.cat.estudos     { background-color: rgb(218, 186, 7); }
-.cat.casa        { background-color: rgb(100, 44, 7); }
-.cat.lazer       { background-color: orangered; }
-.cat.financas    { background-color: green; }
-.cat.projetos    { background-color: rgb(47, 167, 155); }
+.cat.trabalho {
+  background-color: rgb(35, 35, 204);
+}
 
-.listaItens .item.concluido .btnMarcarConcluida button{
+.cat.pessoal {
+  background-color: crimson;
+}
+
+.cat.estudos {
+  background-color: rgb(218, 186, 7);
+}
+
+.cat.casa {
+  background-color: rgb(100, 44, 7);
+}
+
+.cat.lazer {
+  background-color: orangered;
+}
+
+.cat.financas {
+  background-color: green;
+}
+
+.cat.projetos {
+  background-color: rgb(47, 167, 155);
+}
+
+.inputEdicao{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80%;
+  border: none;
+  font-size: 20px;
+}
+
+.listaItens .item.concluido .btnMarcarConcluida button {
   background-color: #2e7d32;
   border: 3px solid #1b5e20;
 }
 
-.listaItens .item.concluido .textoTarefa p{
+.listaItens .item.concluido .textoTarefa p {
   text-decoration: line-through;
   opacity: 80%;
 }
 
-.btnMarcarConcluida{
+.btnMarcarConcluida {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -205,7 +235,7 @@ header .btnAddTarefa{
   margin-left: 0.3vw;
 }
 
-.textoTarefa{
+.textoTarefa {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -215,7 +245,7 @@ header .btnAddTarefa{
   margin-left: 0.3vw;
 }
 
-.btnExcluirEditar{
+.btnExcluirEditar {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -224,20 +254,20 @@ header .btnAddTarefa{
   margin-right: 0.76vw;
 }
 
-.btnMarcarConcluida button{
+.btnMarcarConcluida button {
   height: 25px;
-  width: 25px;  
+  width: 25px;
   background-color: white;
   border: 3px solid rgb(27, 27, 27);
   border-radius: 6px;
   cursor: pointer;
 }
 
-.textoTarefa p{
+.textoTarefa p {
   font-size: 20px;
 }
 
-.btnExcluirEditar .editar{
+.btnExcluirEditar .editar {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -252,7 +282,7 @@ header .btnAddTarefa{
   transition: all 0.3s ease;
 }
 
-.btnExcluirEditar .excluir{
+.btnExcluirEditar .excluir {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -266,155 +296,156 @@ header .btnAddTarefa{
   transition: all 0.3s ease;
 }
 
-.btnExcluirEditar .editar:hover{
+.btnExcluirEditar .editar:hover {
   transform: scale(1.05);
   box-shadow: rgb(13, 61, 220) 0px 1px 5px;
 }
 
-.btnExcluirEditar .excluir:hover{
+.btnExcluirEditar .excluir:hover {
   transform: scale(1.05);
   box-shadow: rgb(190, 9, 9) 0px 1px 5px;
 }
 
-.trabalho{
-  color: rgb(35, 35, 204);  
-  font-weight: bold;  
-}
-
-.pessoal{
-  color: red;
+.trabalho {
+  color: rgb(35, 35, 204);
   font-weight: bold;
 }
 
-.estudos{
+.pessoal {
+  color: crimson;
+  font-weight: bold;
+}
+
+.estudos {
   color: rgb(218, 186, 7);
   font-weight: bold;
 }
 
-.casa{
+.casa {
   color: rgb(100, 44, 7);
   font-weight: bold;
 }
 
-.lazer{
+.lazer {
   color: orangered;
   font-weight: bold;
 }
 
-.financas{
+.financas {
   color: green;
   font-weight: bold;
 }
 
-.projetos{
+.projetos {
   color: rgb(47, 167, 155);
-  font-weight: bold; 
+  font-weight: bold;
 }
 
-@media (max-width: 768px){
-  .entradaTarefa button{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-  height: 70%;
-  width: 10vw;
-  padding: 10px;
-  border: none;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  color: white;
-  background-color: rgb(7, 105, 32);
-  font-weight: 600;
-  font-size: 30px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-}
-
-@media (max-width: 1024px){
-  .listaItens .item{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 80vw;
-  max-width: 80vw;
-  height: 8vh;
-  margin-bottom: 1.5vh;
-  border-radius: 10px;
-  background: white;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+@media (max-width: 768px) {
+  .entradaTarefa button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    height: 70%;
+    width: 10vw;
+    padding: 10px;
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: white;
+    background-color: rgb(7, 105, 32);
+    font-weight: 600;
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
 }
 
-  .listaItens .item.concluido{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 80vw;
-  max-width: 80vw;
-  height: 8vh;
-  margin-bottom: 1.5vh;
-  border-radius: 10px;
-  background-color: rgb(76, 175, 80);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  
+@media (max-width: 1024px) {
+  .listaItens .item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80vw;
+    max-width: 80vw;
+    height: 8vh;
+    margin-bottom: 1.5vh;
+    border-radius: 10px;
+    background: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+
+  .listaItens .item.concluido {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80vw;
+    max-width: 80vw;
+    height: 8vh;
+    margin-bottom: 1.5vh;
+    border-radius: 10px;
+    background-color: rgb(76, 175, 80);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+
+  .entradaTarefa .inputTarefa {
+    flex-direction: column;
+  }
+
+  .entradaTarefa input {
+    font-size: 20px;
+    height: 70%;
+    width: 60vw;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .entradaTarefa select {
+    font-size: 20px;
+    height: 90%;
+    width: 60vw;
+    border: 2px solid black;
+    text-align: start;
+    padding-right: 10px;
+    border-radius: 10px;
+    margin-top: 0.7vh;
+    margin-left: 0;
+  }
+
+  .entradaTarefa button {
+    height: 90%;
+    margin-left: 0.8vw;
+    width: 40px;
+  }
+
+  .entradaTarefa .btnAddTarefa {
+    height: 100%;
+    align-items: center;
+  }
 }
 
-.entradaTarefa .inputTarefa{
-  flex-direction: column;
-}
-
-.entradaTarefa input{
-  font-size: 20px;
-  height: 70%;
-  width: 60vw;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.entradaTarefa select{
-  font-size: 20px;
-  height: 90%;
-  width: 60vw;
-  border: 2px solid black;
-  text-align: start;
-  padding-right: 10px;
-  border-radius: 10px;
-  margin-top: 0.7vh;
-  margin-left: 0;
-}
-
-.entradaTarefa button{
-  height: 90%;
-  margin-left: 0.8vw;
-  width: 40px;
-}
-
-.entradaTarefa .btnAddTarefa{
-  height: 100%;
-  align-items: center;
-}
-}
-
-@media (max-width: 425px){
-  header .titulo{
+@media (max-width: 425px) {
+  header .titulo {
     font-size: 15px;
   }
 
-  .btnMarcarConcluida{
-    margin-left: 2vw; 
+  .btnMarcarConcluida {
+    margin-left: 2vw;
   }
-  .textoTarefa{
+
+  .textoTarefa {
     margin-left: 1vw;
   }
 
-  .btnExcluirEditar .excluir{
+  .btnExcluirEditar .excluir {
     width: 7.6vw;
     font-size: 15px;
   }
 
-  .entradaTarefa button{
+  .entradaTarefa button {
     margin-left: 2vw;
   }
 }

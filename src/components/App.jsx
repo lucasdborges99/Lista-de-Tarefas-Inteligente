@@ -9,6 +9,7 @@ function App() {
   const[select, setSelect] = useState('');
   const[catColor, setCatColor] = useState('black');
   const carregamentoIncial = useRef(true);  
+  const[tarefaEmEdicao, setTarefaEmEdicao] = useState(null);
 
   function mudancaInput(mudanca){     //pega o evento mandado automaticamente pelo onChange do input, o .target identifica qual
   setInput(mudanca.target.value);     //elemento foi mudado e o .value pega o valor atual*/
@@ -19,6 +20,11 @@ function App() {
       alert("Digite alguma tarefa e selecione uma categoria!");
       return;
     }    
+
+    if(tarefaEmEdicao !== null){
+      alert("Termine de editar a tarefa antes de criar uma nova!");
+      return;
+    }
 
     const novaTarefa = 
     {                                                    //cria um objeto com id e o valor do input que sera o texto da tarefa
@@ -59,7 +65,7 @@ function App() {
         setCatColor('rgb(35, 35, 204)');
         break;
       case 'pessoal':
-        setCatColor('red');
+        setCatColor('crimson');
         break;
       case 'estudos':
         setCatColor('rgb(218, 186, 7)');
@@ -81,9 +87,24 @@ function App() {
       }
     }
 
-    // editarTarefa(idTarefa){
-      
-    // }
+  function editarTarefa(idTarefa){
+    setTarefaEmEdicao(valorAnterior => valorAnterior === idTarefa ? null : idTarefa)
+  }
+
+  function atualizarTextoEditado(idTarefaEmEdicao, textoEditado){
+    setListaDeTarefas(
+      listaDeTarefas.map(tarefaEditada =>
+        idTarefaEmEdicao === tarefaEditada.id ? {...tarefaEditada, texto: textoEditado} : tarefaEditada
+      )
+    )
+  }
+
+  function mudarBotao(idTarefa){
+    const tarefa = listaDeTarefas.find(t => t.id === idTarefa);
+    if(!tarefa) return ''; 
+
+    return tarefaEmEdicao === idTarefa ? '✅' : '✏️'
+  }
 
   useEffect(() => {
     const tarefasSalvas = localStorage.getItem('tarefas');        //Carrega as tarefas salvas
@@ -114,8 +135,25 @@ function App() {
 
   return(
       <div className='container'>
-        <InputTarefa input={input} mudancaInput={mudancaInput} addTarefaNaLista={addTarefaNaLista} select={select} mudancaSelect={mudancaSelect} catColor={catColor} addTarefaEnter={addTarefaEnter}/>
-        <ListaItens listaDeTarefas={listaDeTarefas} removerTarefaDaLista={removerTarefaDaLista} marcarTarefaConcluida={marcarTarefaConcluida} /*editarTarefa={editarTarefa}*//>
+        <InputTarefa 
+        input = {input} 
+        mudancaInput = {mudancaInput} 
+        addTarefaNaLista = {addTarefaNaLista} 
+        select = {select} 
+        mudancaSelect = {mudancaSelect} 
+        catColor = {catColor} 
+        addTarefaEnter = {addTarefaEnter}
+        />
+        <ListaItens 
+        listaDeTarefas = {listaDeTarefas} 
+        removerTarefaDaLista = {removerTarefaDaLista} 
+        marcarTarefaConcluida = {marcarTarefaConcluida} 
+        editarTarefa = {editarTarefa} 
+        tarefaEmEdicao = {tarefaEmEdicao} 
+        setTarefaEmEdicao = {setTarefaEmEdicao} 
+        atualizarTextoEditado = {atualizarTextoEditado}
+        mudarBotao = {mudarBotao}
+        />
       </div> 
 
   );

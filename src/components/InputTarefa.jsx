@@ -8,7 +8,7 @@ function InputTarefa({input, mudancaInput, addTarefaNaLista, select, mudancaSele
 
             <div className="entradaTarefa">
                 <div className="inputTarefa">
-                    <input type="text"  placeholder='Digite sua tarefa...' value={input} onChange={mudancaInput} onKeyPress={addTarefaEnter}/>
+                    <input type="text"  placeholder='Digite sua tarefa...' value={input} onChange={mudancaInput} onKeyDown={addTarefaEnter}/>
                     <div className="categorias">
                         <select onChange={mudancaSelect} onKeyPress={addTarefaEnter} value={select} style={{color: catColor}}>
                             <option value="" hidden>Categoria</option>
