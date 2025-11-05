@@ -95,7 +95,7 @@ header .btnAddTarefa{
   border: none;
   border-radius: 10px;
   color: white;
-  background-color: rgb(7, 105, 32);
+  background-color: rgb(4, 150, 40);
   font-weight: 600;
   font-size: 40px;
   cursor: pointer;
@@ -104,7 +104,7 @@ header .btnAddTarefa{
 
 .entradaTarefa button:hover{
   transform: scale(1.03);
-  box-shadow: rgb(7, 105, 32) 0px 1px 5px;
+  box-shadow: rgb(4, 150, 40) 0px 1px 5px;
 }
 
 .listaItens{
@@ -151,10 +151,41 @@ header .btnAddTarefa{
   font-weight: 500;
 }
 
-.cat{ 
+.cat{
   height: 100%;
   width: 1vw;
+  font-size: 20px;
+  transition: width 0.5s ease;
+  overflow: hidden;
+  transform: translateX();
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.cat p{
+  transform: translateX(6vw);
+  transition: transform 0.5s ease 0.1s;
+}
+
+.cat:hover{
+  width: 9vw;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+}
+
+.cat:hover p{
+  transform: translateX(0px);
+}
+
+.cat.trabalho    { background-color: rgb(35, 35, 204); }
+.cat.pessoal     { background-color: red; }
+.cat.estudos     { background-color: rgb(218, 186, 7); }
+.cat.casa        { background-color: rgb(100, 44, 7); }
+.cat.lazer       { background-color: orangered; }
+.cat.financas    { background-color: green; }
+.cat.projetos    { background-color: rgb(47, 167, 155); }
 
 .listaItens .item.concluido .btnMarcarConcluida button{
   background-color: #2e7d32;
@@ -312,6 +343,10 @@ header .btnAddTarefa{
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;  
 }
 
+.entradaTarefa .inputTarefa{
+  flex-direction: column;
+}
+
 .entradaTarefa input{
   font-size: 20px;
   height: 70%;
@@ -322,18 +357,25 @@ header .btnAddTarefa{
 
 .entradaTarefa select{
   font-size: 20px;
-  height: 70%;
-  width: 10vw;
+  height: 90%;
+  width: 60vw;
   border: 2px solid black;
   text-align: start;
   padding-right: 10px;
   border-radius: 10px;
-  margin-left: 0.5vw;
+  margin-top: 0.7vh;
+  margin-left: 0;
 }
 
 .entradaTarefa button{
-  height: 70%;
-  margin-left: 0.5vw;
+  height: 90%;
+  margin-left: 0.8vw;
+  width: 40px;
+}
+
+.entradaTarefa .btnAddTarefa{
+  height: 100%;
+  align-items: center;
 }
 }
 
@@ -352,5 +394,9 @@ header .btnAddTarefa{
   .btnExcluir button{
     width: 7.6vw;
     font-size: 15px;
+  }
+
+  .entradaTarefa button{
+    margin-left: 2vw;
   }
 }

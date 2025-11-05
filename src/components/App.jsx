@@ -2,7 +2,6 @@ import { useState } from 'react';
 import '../styles/App.css';
 import InputTarefa from './InputTarefa';
 import ListaItens from './ListaItens';
-import { use } from 'react';
 
 function App() { 
   const[input, setInput] = useState('');
@@ -72,10 +71,6 @@ function App() {
         setCatColor('black');
 
     }
-  }
-
-  function mudarCorEtiqueta(){
-
   }
 
   return(
