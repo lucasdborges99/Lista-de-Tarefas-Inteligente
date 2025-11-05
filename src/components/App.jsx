@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
+import Header from './Header';
+import ListaTarefas from './ListaTarefas';
+import Filtro from './filtro';
 import '../styles/App.css';
-import InputTarefa from './InputTarefa';
-import ListaItens from './ListaItens';
 
 function App() { 
   const[input, setInput] = useState('');
@@ -10,11 +11,16 @@ function App() {
   const[catColor, setCatColor] = useState('black');
   const carregamentoIncial = useRef(true);  
   const[tarefaEmEdicao, setTarefaEmEdicao] = useState(null);
+  const[selectFiltro, setSelectFiltro] = useState('');
 
-  function mudancaInput(mudanca){     //pega o evento mandado automaticamente pelo onChange do input, o .target identifica qual
-  setInput(mudanca.target.value);     //elemento foi mudado e o .value pega o valor atual*/
+
+  //! MUDA O ESTADO DO INPUT PARA O QUE FOR DIGITADO  (Header.jsx)
+  function mudancaInput(mudanca){     
+  setInput(mudanca.target.value);
   } 
 
+
+  //! ADICIONA A TAREFA NA LISTA  (Header.jsx)
   function addTarefaNaLista(valorTarefa, valorCategoria){  
     if(valorTarefa.trim() === '' || valorCategoria === ''){
       alert("Digite alguma tarefa e selecione uma categoria!");
@@ -27,36 +33,30 @@ function App() {
     }
 
     const novaTarefa = 
-    {                                                    //cria um objeto com id e o valor do input que sera o texto da tarefa
-    id: Date.now(),                                      //da um id unico
-    texto: valorTarefa,                                  //texto da tarefa
+    {                                                    
+    id: Date.now(),                                      
+    texto: valorTarefa,                                  
     concluido: false,
-    categoria: valorCategoria                            //status dela
-    };                                                   //pega a lista nova, deixa ela como tudo que ja tinha na listaDeTarefas(usando
-    let novaLista = [...listaDeTarefas, novaTarefa];     //os ...) mais o valor do input, depois atualiza o useState passando a novaLista
-    setListaDeTarefas(novaLista);                        //como parametro
-    setSelect('')                                        //limpa o select
-    setCatColor('black')                                 //deixa o select preto denovo
-    setInput('');                                        //limpa o input
+    categoria: valorCategoria                           
+    };                                                  
+    let novaLista = [...listaDeTarefas, novaTarefa];     
+    setListaDeTarefas(novaLista);                       
+    setSelect('')                                       
+    setCatColor('black')                           
+    setInput('');                                        
   }
 
-  function addTarefaEnter(evento){                        //adiciona tarefa ao pressionar enter
+
+  //! ADICIONA A TAREFA NA LISTA POR MEIO DO TECLADO  (Header.jsx)
+  function addTarefaEnter(evento){                        
     if(evento.key === 'Enter'){
       evento.preventDefault();
       addTarefaNaLista(input, select);
     }
   }
-
-  function removerTarefaDaLista(idTarefa){                                         //pega a funcao da lista de tarefas, no parametro(que
-    setListaDeTarefas(listaDeTarefas.filter(tarefa => tarefa.id !== idTarefa));    //sera o novo useState) ele filtra para que só aparecam
-  }                                                                                 //as tarefas cujo id são diferentes do idRemocao, que é o id que esta sendo passado
-
-  function marcarTarefaConcluida(idTarefa){
-    setListaDeTarefas(lista => lista.map(tarefa => 
-      tarefa.id === idTarefa ? {... tarefa, concluido: !tarefa.concluido} : tarefa
-    ));
-  }
-
+  
+  
+  //! MUDA O ESTADO E A COR DO SELECT PARA O QUE FOR SELECIONADO  (Header.jsx)
   function mudancaSelect(mudanca){
     setSelect(mudanca.target.value);
 
@@ -87,11 +87,31 @@ function App() {
       }
     }
 
-  function editarTarefa(idTarefa){
+
+  //! REMOVE A TAREFA DA LISTA  (Tarefa.jsx)  
+  function removerTarefaDaLista(idTarefa){                                         
+    setListaDeTarefas(listaDeTarefas.filter(tarefa => tarefa.id !== idTarefa));    
+  }                                                                                
+
+
+  //! MARCA A TAREFA COMO CONCLUÍDA  (Tarefa.jsx)
+  function marcarTarefaConcluida(idTarefa){
+    setListaDeTarefas(lista => lista.map(tarefa => 
+      tarefa.id === idTarefa ? {... tarefa, concluido: !tarefa.concluido} : tarefa
+    ));
+  }
+
+
+
+
+  //! MUDA O ESTADO SE TEM ALGUMA TAREFA SENDO EDITADA  (Tarefa.jsx)
+  function mudancaEdicao(idTarefa){
     setTarefaEmEdicao(valorAnterior => valorAnterior === idTarefa ? null : idTarefa)
   }
 
-  function atualizarTextoEditado(idTarefaEmEdicao, textoEditado){
+
+  //! ATUALIZA O TEXTO DA TAREFA EDITADA  (Tarefa.jsx)
+  function editarTarefa(idTarefaEmEdicao, textoEditado){
     setListaDeTarefas(
       listaDeTarefas.map(tarefaEditada =>
         idTarefaEmEdicao === tarefaEditada.id ? {...tarefaEditada, texto: textoEditado} : tarefaEditada
@@ -99,6 +119,8 @@ function App() {
     )
   }
 
+
+  //! MUDA O EMOJI DO BOTÃO DE EDIÇÃO (Tarefa.jsx)
   function mudarBotao(idTarefa){
     const tarefa = listaDeTarefas.find(t => t.id === idTarefa);
     if(!tarefa) return ''; 
@@ -106,8 +128,26 @@ function App() {
     return tarefaEmEdicao === idTarefa ? '✅' : '✏️'
   }
 
+  //! SALVA A TAREFA COM VALOR DEIXADO DEPOIS DA EDIÇÃO (Tarefa.jsx)
+  function salvar(conteudoTarefa){
+          conteudoTarefa.trim() === '' 
+          ? (alert('A sua tarefa está vazia, digite algo!'), setTimeout(() => inputEdicao.current.focus(), 50))
+          : setTimeout(() => setTarefaEmEdicao(null), 300)
+      }
+
+
+  //! SALVA A TAREFA COM O VALOR DEIXADO APÓS A EDIÇÃO POR MEIO DO TECLADO  (Tarefa.jsx) 
+  function teclaSalvar(tecla, conteudoTarefa){
+          if(tecla.key === 'Enter'){
+              tecla.preventDefault();
+              tecla.target.blur();
+          }
+      }
+
+
+  //! CARREGA AS TAREFAS SALVAS NO LOCAL STORAGE  (App.jsx)
   useEffect(() => {
-    const tarefasSalvas = localStorage.getItem('tarefas');        //Carrega as tarefas salvas
+    const tarefasSalvas = localStorage.getItem('tarefas');        
     if(tarefasSalvas){
       try{
         const tarefasParseadas = JSON.parse(tarefasSalvas);
@@ -124,18 +164,22 @@ function App() {
     }
   }, []);
 
+
+  //! SALVA AS TAREFAS E SUAS MUDANÇAS  (App.jsx)
   useEffect(() => {
     if(carregamentoIncial.current){
       carregamentoIncial.current = false;
       return;
     }
 
-    localStorage.setItem('tarefas', JSON.stringify(listaDeTarefas));      //salva ao mudar
+    localStorage.setItem('tarefas', JSON.stringify(listaDeTarefas));      
   }, [listaDeTarefas]);
 
+
+  //! CONTEÚDO HTML DA PÁGINA (App.jsx)
   return(
       <div className='container'>
-        <InputTarefa 
+        <Header 
         input = {input} 
         mudancaInput = {mudancaInput} 
         addTarefaNaLista = {addTarefaNaLista} 
@@ -144,15 +188,21 @@ function App() {
         catColor = {catColor} 
         addTarefaEnter = {addTarefaEnter}
         />
-        <ListaItens 
+        <Filtro
+        selectFiltro={selectFiltro}
+        setSelectFiltro={setSelectFiltro}
+        />
+        <ListaTarefas 
         listaDeTarefas = {listaDeTarefas} 
         removerTarefaDaLista = {removerTarefaDaLista} 
         marcarTarefaConcluida = {marcarTarefaConcluida} 
+        mudancaEdicao = {mudancaEdicao}
         editarTarefa = {editarTarefa} 
         tarefaEmEdicao = {tarefaEmEdicao} 
         setTarefaEmEdicao = {setTarefaEmEdicao} 
-        atualizarTextoEditado = {atualizarTextoEditado}
         mudarBotao = {mudarBotao}
+        salvar = {salvar}
+        teclaSalvar= {teclaSalvar}
         />
       </div> 
 
