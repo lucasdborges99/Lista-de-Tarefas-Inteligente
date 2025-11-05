@@ -157,7 +157,6 @@ header .btnAddTarefa{
   font-size: 20px;
   transition: width 0.5s ease;
   overflow: hidden;
-  transform: translateX();
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,7 +215,7 @@ header .btnAddTarefa{
   margin-left: 0.3vw;
 }
 
-.btnExcluir{
+.btnExcluirEditar{
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -238,7 +237,22 @@ header .btnAddTarefa{
   font-size: 20px;
 }
 
-.btnExcluir button{
+.btnExcluirEditar .editar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 53%;
+  margin-right: 0.3vw;
+  border-radius: 6px;
+  border: none;
+  background: rgb(13, 61, 220);
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.btnExcluirEditar .excluir{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,13 +261,17 @@ header .btnAddTarefa{
   border-radius: 6px;
   border: none;
   background: rgb(190, 9, 9);
-  color: white;
   cursor: pointer;
   font-size: 20px;
   transition: all 0.3s ease;
 }
 
-.btnExcluir button:hover{
+.btnExcluirEditar .editar:hover{
+  transform: scale(1.05);
+  box-shadow: rgb(13, 61, 220) 0px 1px 5px;
+}
+
+.btnExcluirEditar .excluir:hover{
   transform: scale(1.05);
   box-shadow: rgb(190, 9, 9) 0px 1px 5px;
 }
@@ -391,7 +409,7 @@ header .btnAddTarefa{
     margin-left: 1vw;
   }
 
-  .btnExcluir button{
+  .btnExcluirEditar .excluir{
     width: 7.6vw;
     font-size: 15px;
   }

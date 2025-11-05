@@ -1,4 +1,4 @@
-function ItemTarefa({listaDeTarefas, removerTarefaDaLista, marcarTarefaConcluida}){
+function ItemTarefa({listaDeTarefas, removerTarefaDaLista, marcarTarefaConcluida, /*editarTarefa*/}){
 
     function mudarCorEtiqueta(categoria){
         switch(categoria){
@@ -40,8 +40,9 @@ function ItemTarefa({listaDeTarefas, removerTarefaDaLista, marcarTarefaConcluida
                     <div className="textoTarefa">
                         <p>{tarefa.texto}</p>
                     </div>
-                    <div className="btnExcluir" onClick={() => removerTarefaDaLista(tarefa.id)}>
-                        <button>🗑️</button>
+                    <div className="btnExcluirEditar">
+                        <button /*onClick={() => editarTarefa(tarefa.id)}*/className="editar" >✏️</button>
+                        <button  onClick={() => removerTarefaDaLista(tarefa.id)} className="excluir">🗑️</button>
                     </div>
                 </div>
             ))}

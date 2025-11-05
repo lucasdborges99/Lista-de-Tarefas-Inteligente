@@ -1,4 +1,4 @@
-function InputTarefa({input, mudancaInput, addTarefaNaLista, select, mudancaSelect, catColor}){
+function InputTarefa({input, mudancaInput, addTarefaNaLista, select, mudancaSelect, catColor, addTarefaEnter}){
 
     return(
         <header>
@@ -8,9 +8,9 @@ function InputTarefa({input, mudancaInput, addTarefaNaLista, select, mudancaSele
 
             <div className="entradaTarefa">
                 <div className="inputTarefa">
-                    <input type="text"  placeholder='Digite sua tarefa...' value={input} onChange={mudancaInput}/>
+                    <input type="text"  placeholder='Digite sua tarefa...' value={input} onChange={mudancaInput} onKeyPress={addTarefaEnter}/>
                     <div className="categorias">
-                        <select onChange={mudancaSelect} value={select} style={{color: catColor}}>
+                        <select onChange={mudancaSelect} onKeyPress={addTarefaEnter} value={select} style={{color: catColor}}>
                             <option value="" hidden>Categoria</option>
                             <option className="trabalho" value="trabalho">Trabalho</option>
                             <option className="pessoal" value="pessoal">Pessoal</option>

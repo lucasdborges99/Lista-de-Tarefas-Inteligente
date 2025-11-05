@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import '../styles/App.css';
 import InputTarefa from './InputTarefa';
 import ListaItens from './ListaItens';
@@ -8,6 +8,7 @@ function App() {
   const[listaDeTarefas, setListaDeTarefas] = useState([]);
   const[select, setSelect] = useState('');
   const[catColor, setCatColor] = useState('black');
+  const carregamentoIncial = useRef(true);  
 
   function mudancaInput(mudanca){     //pega o evento mandado automaticamente pelo onChange do input, o .target identifica qual
   setInput(mudanca.target.value);     //elemento foi mudado e o .value pega o valor atual*/
@@ -28,9 +29,17 @@ function App() {
     };                                                   //pega a lista nova, deixa ela como tudo que ja tinha na listaDeTarefas(usando
     let novaLista = [...listaDeTarefas, novaTarefa];     //os ...) mais o valor do input, depois atualiza o useState passando a novaLista
     setListaDeTarefas(novaLista);                        //como parametro
+    setSelect('')                                        //limpa o select
+    setCatColor('black')                                 //deixa o select preto denovo
     setInput('');                                        //limpa o input
   }
 
+  function addTarefaEnter(evento){                        //adiciona tarefa ao pressionar enter
+    if(evento.key === 'Enter'){
+      evento.preventDefault();
+      addTarefaNaLista(input, select);
+    }
+  }
 
   function removerTarefaDaLista(idTarefa){                                         //pega a funcao da lista de tarefas, no parametro(que
     setListaDeTarefas(listaDeTarefas.filter(tarefa => tarefa.id !== idTarefa));    //sera o novo useState) ele filtra para que só aparecam
@@ -69,14 +78,44 @@ function App() {
         break;
       default:
         setCatColor('black');
-
+      }
     }
-  }
+
+    // editarTarefa(idTarefa){
+      
+    // }
+
+  useEffect(() => {
+    const tarefasSalvas = localStorage.getItem('tarefas');        //Carrega as tarefas salvas
+    if(tarefasSalvas){
+      try{
+        const tarefasParseadas = JSON.parse(tarefasSalvas);
+        setListaDeTarefas(tarefasParseadas);
+      }
+      catch(error){
+        console.error('Erro ao carregar tarefas', error);
+        localStorage.removeItem('tarefas');
+      }
+    }
+
+    else{
+      console.warn('localStorage não está disponível')
+    }
+  }, []);
+
+  useEffect(() => {
+    if(carregamentoIncial.current){
+      carregamentoIncial.current = false;
+      return;
+    }
+
+    localStorage.setItem('tarefas', JSON.stringify(listaDeTarefas));      //salva ao mudar
+  }, [listaDeTarefas]);
 
   return(
       <div className='container'>
-        <InputTarefa input={input} mudancaInput={mudancaInput} addTarefaNaLista={addTarefaNaLista} select={select} mudancaSelect={mudancaSelect} catColor={catColor}/>
-        <ListaItens listaDeTarefas={listaDeTarefas} removerTarefaDaLista={removerTarefaDaLista} marcarTarefaConcluida={marcarTarefaConcluida}/>
+        <InputTarefa input={input} mudancaInput={mudancaInput} addTarefaNaLista={addTarefaNaLista} select={select} mudancaSelect={mudancaSelect} catColor={catColor} addTarefaEnter={addTarefaEnter}/>
+        <ListaItens listaDeTarefas={listaDeTarefas} removerTarefaDaLista={removerTarefaDaLista} marcarTarefaConcluida={marcarTarefaConcluida} /*editarTarefa={editarTarefa}*//>
       </div> 
 
   );
