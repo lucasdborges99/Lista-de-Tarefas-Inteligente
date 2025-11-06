@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import Header from './Header';
 import ListaTarefas from './ListaTarefas';
-import Filtro from './filtro';
 import '../styles/App.css';
 
 function App() { 
@@ -187,10 +186,8 @@ function App() {
         mudancaSelect = {mudancaSelect} 
         catColor = {catColor} 
         addTarefaEnter = {addTarefaEnter}
-        />
-        <Filtro
-        selectFiltro={selectFiltro}
-        setSelectFiltro={setSelectFiltro}
+        selectFiltro = {selectFiltro}
+        setSelectFiltro = {setSelectFiltro}
         />
         <ListaTarefas 
         listaDeTarefas = {listaDeTarefas} 
