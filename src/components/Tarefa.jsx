@@ -6,14 +6,9 @@ function Tarefa({
     removerTarefaDaLista,
     marcarTarefaConcluida,
     mudancaEdicao,
-    editarTarefa,
-    tarefaEmEdicao,
-    setTarefaEmEdicao,
     mudarBotao,
-    salvar,
-    teclaSalvar})
+    verificarEdicao})
 {
-    const inputEdicao = useRef(null);    
     
 
     //! MUDA A COR DA BARRA LATERAL DE CATEGORIA
@@ -57,18 +52,10 @@ function Tarefa({
                         <button onClick={() => marcarTarefaConcluida(tarefa.id)}></button>
                     </div>
                     <div className="textoTarefa">
-                        {tarefaEmEdicao === tarefa.id ? (
-                            <input type="text" value={tarefa.texto} ref={inputEdicao} autoFocus={true}
-                            onChange={(texto) => editarTarefa(tarefa.id, texto.target.value)}
-                            onKeyDown={(tecla) => teclaSalvar(tecla, tarefa.texto)}
-                            onBlur={() => salvar(tarefa.texto)}
-                            />
-                        ) : (
-                            <p>{tarefa.texto}</p>
-                        )}
+                        {verificarEdicao(tarefa)}
                     </div>
                     <div className="btnExcluirEditar">
-                        <button onClick={() => mudancaEdicao(tarefa.id)} className="editar" >{mudarBotao(tarefa.id)}</button>
+                        <button onClick={() => mudancaEdicao(tarefa.id, tarefa.texto)} className="editar" >{mudarBotao(tarefa.id)}</button>
                         <button  onClick={() => removerTarefaDaLista(tarefa.id)} className="excluir">🗑️</button>
                     </div>
                 </div>

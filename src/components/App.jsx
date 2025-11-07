@@ -10,6 +10,8 @@ function App() {
   const[catColor, setCatColor] = useState('black');
   const carregamentoIncial = useRef(true);  
   const[tarefaEmEdicao, setTarefaEmEdicao] = useState(null);
+  const inputTarefa = useRef(null);
+  const inputEdicao = useRef(null);
 
 
   //! MUDA O ESTADO DO INPUT PARA O QUE FOR DIGITADO  (Header.jsx)
@@ -103,9 +105,21 @@ function App() {
 
 
   //! MUDA O ESTADO SE TEM ALGUMA TAREFA SENDO EDITADA  (Tarefa.jsx)
-  function mudancaEdicao(idTarefa){
-    setTarefaEmEdicao(valorAnterior => valorAnterior === idTarefa ? null : idTarefa)
-  }
+  function mudancaEdicao(idTarefa, conteudoTarefa) {
+    const tarefa = listaDeTarefas.find(t => t.id === idTarefa);
+    if (!tarefa) return;
+  
+    if (tarefaEmEdicao === idTarefa) {
+      if (conteudoTarefa.trim() === "") {
+        alert("A sua tarefa está vazia, digite algo!");
+        return;
+      }
+      setTarefaEmEdicao(null);
+      return;
+    }
+    setTarefaEmEdicao(idTarefa);
+}
+
 
 
   //! ATUALIZA O TEXTO DA TAREFA EDITADA  (Tarefa.jsx)
@@ -135,13 +149,29 @@ function App() {
 
 
   //! SALVA A TAREFA COM O VALOR DEIXADO APÓS A EDIÇÃO POR MEIO DO TECLADO  (Tarefa.jsx) 
-  function teclaSalvar(tecla, conteudoTarefa){
-          if(tecla.key === 'Enter'){
-              tecla.preventDefault();
-              tecla.target.blur();
-          }
-      }
+  function teclaSalvar(tecla){
+    if(tecla.key === 'Enter'){
+      tecla.preventDefault();
+      tecla.target.blur();
+    }
+  }
 
+
+  //! VERIFICA SE A TAREFA ESTÁ EM EDIÇÃO OU NÃO  (Tarefa.jsx)
+  function verificarEdicao(tarefa){
+    return tarefaEmEdicao === tarefa.id ? (
+      <input 
+      type="text" 
+      value={tarefa.texto} 
+      ref={inputEdicao}
+      onChange={(texto) => editarTarefa(tarefa.id, texto.target.value)}
+      onKeyDown={(tecla) => teclaSalvar(tecla, tarefa.texto)}
+      onBlur={() => salvar(tarefa.texto)}
+      />
+    ) : (
+      <p>{tarefa.texto}</p>
+    )
+  }
 
   //! CARREGA AS TAREFAS SALVAS NO LOCAL STORAGE  (App.jsx)
   useEffect(() => {
@@ -197,6 +227,7 @@ function App() {
         mudarBotao = {mudarBotao}
         salvar = {salvar}
         teclaSalvar= {teclaSalvar}
+        verificarEdicao = {verificarEdicao}
         />
       </div> 
 

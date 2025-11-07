@@ -6,12 +6,8 @@ function ListaTarefas({
     removerTarefaDaLista,
     marcarTarefaConcluida,
     mudancaEdicao,
-    editarTarefa,
-    tarefaEmEdicao,
-    setTarefaEmEdicao,
     mudarBotao,
-    salvar,
-    teclaSalvar})
+    verificarEdicao})
 {
     return(
         <div className="listaItens">
@@ -19,13 +15,9 @@ function ListaTarefas({
             listaDeTarefas={listaDeTarefas} 
             removerTarefaDaLista={removerTarefaDaLista} 
             marcarTarefaConcluida={marcarTarefaConcluida} 
-            mudancaEdicao = {mudancaEdicao} 
-            editarTarefa = {editarTarefa}
-            tarefaEmEdicao = {tarefaEmEdicao} 
-            setTarefaEmEdicao = {setTarefaEmEdicao} 
+            mudancaEdicao = {mudancaEdicao}  
             mudarBotao = {mudarBotao}
-            salvar = {salvar}
-            teclaSalvar = {teclaSalvar}
+            verificarEdicao = {verificarEdicao}
             />
         </div>
     );
