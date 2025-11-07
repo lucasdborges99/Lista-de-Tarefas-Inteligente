@@ -3,8 +3,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 50vw;
-  max-width: 50vw;
+  width: 55vw;
+  max-width: 58vw;
   height: 8vh;
   overflow: hidden;
   margin-bottom: 1.5vh;
@@ -110,8 +110,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 50vw;
-  max-width: 50vw;
+  width: 55vw;
+  max-width: 55vw;
   height: 8vh;
   margin-bottom: 1.5vh;
   border-radius: 10px;

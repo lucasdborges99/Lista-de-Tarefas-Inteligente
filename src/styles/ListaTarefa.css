@@ -1,8 +1,9 @@
 .listaItens {
-    flex: 85%;
+    flex: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    width: 100vw;
+    margin-top: 1vh;
+    width: 55vw;
 }

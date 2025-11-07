@@ -10,7 +10,6 @@ function App() {
   const[catColor, setCatColor] = useState('black');
   const carregamentoIncial = useRef(true);  
   const[tarefaEmEdicao, setTarefaEmEdicao] = useState(null);
-  const[selectFiltro, setSelectFiltro] = useState('');
 
 
   //! MUDA O ESTADO DO INPUT PARA O QUE FOR DIGITADO  (Header.jsx)
@@ -186,8 +185,6 @@ function App() {
         mudancaSelect = {mudancaSelect} 
         catColor = {catColor} 
         addTarefaEnter = {addTarefaEnter}
-        selectFiltro = {selectFiltro}
-        setSelectFiltro = {setSelectFiltro}
         />
         <ListaTarefas 
         listaDeTarefas = {listaDeTarefas} 
