@@ -7,7 +7,8 @@ function ListaTarefas({
     marcarTarefaConcluida,
     mudancaEdicao,
     mudarBotao,
-    verificarEdicao})
+    verificarEdicao,
+    inputEdicao})
 {
     return(
         <div className="listaItens">
@@ -18,6 +19,7 @@ function ListaTarefas({
             mudancaEdicao = {mudancaEdicao}  
             mudarBotao = {mudarBotao}
             verificarEdicao = {verificarEdicao}
+            inputEdicao = {inputEdicao}
             />
         </div>
     );

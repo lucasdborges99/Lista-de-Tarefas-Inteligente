@@ -1,4 +1,5 @@
 import App from './App';
+import {useRef } from 'react';
 import '../styles/Header.css';
 
 function Header({
@@ -8,7 +9,8 @@ function Header({
     select,
     mudancaSelect,
     catColor,
-    addTarefaEnter})
+    addTarefaEnter,
+    inputTarefa})
 {
     return(
         <header>
@@ -18,7 +20,7 @@ function Header({
 
             <div className="entradaTarefa">
                 <div className="inputTarefa">
-                    <input type="text"  placeholder='Digite sua tarefa...' value={input} onChange={mudancaInput} onKeyDown={addTarefaEnter}/>
+                    <input type="text"  placeholder='Digite sua tarefa...' value={input} onChange={mudancaInput} onKeyDown={addTarefaEnter} ref={inputTarefa}/>
                     <select onChange={mudancaSelect} onKeyDown={addTarefaEnter} value={select} style={{color: catColor}}>
                         <option value="" hidden>Categoria</option>
                         <option className="trabalho" value="trabalho">Trabalho</option>

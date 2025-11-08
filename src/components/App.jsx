@@ -24,6 +24,7 @@ function App() {
   function addTarefaNaLista(valorTarefa, valorCategoria){  
     if(valorTarefa.trim() === '' || valorCategoria === ''){
       alert("Digite alguma tarefa e selecione uma categoria!");
+      inputTarefa.current.focus();
       return;
     }    
 
@@ -105,19 +106,27 @@ function App() {
 
 
   //! MUDA O ESTADO SE TEM ALGUMA TAREFA SENDO EDITADA  (Tarefa.jsx)
-  function mudancaEdicao(idTarefa, conteudoTarefa) {
-    const tarefa = listaDeTarefas.find(t => t.id === idTarefa);
-    if (!tarefa) return;
-  
-    if (tarefaEmEdicao === idTarefa) {
-      if (conteudoTarefa.trim() === "") {
-        alert("A sua tarefa está vazia, digite algo!");
+  function mudancaEdicao(idTarefa, conteudoTarefa, inputEdicao) {
+    if(tarefaEmEdicao === null){
+      const tarefa = listaDeTarefas.find(t => t.id === idTarefa);
+      if (!tarefa) return;
+    
+      if (tarefaEmEdicao === idTarefa) {
+        if (conteudoTarefa.trim() === "") {
+          alert("A sua tarefa está vazia, digite algo!");
+          return;
+        }
+        setTarefaEmEdicao(null);
         return;
       }
-      setTarefaEmEdicao(null);
+      setTarefaEmEdicao(idTarefa);
+      setTimeout(() => inputEdicao.current.focus(), 10)
+    } else{
+      alert("Já tem uma tarefa sendo editada, termine de editar ela para editar outra!");
       return;
     }
-    setTarefaEmEdicao(idTarefa);
+
+    
 }
 
 
@@ -215,6 +224,7 @@ function App() {
         mudancaSelect = {mudancaSelect} 
         catColor = {catColor} 
         addTarefaEnter = {addTarefaEnter}
+        inputTarefa = {inputTarefa}
         />
         <ListaTarefas 
         listaDeTarefas = {listaDeTarefas} 
@@ -228,6 +238,7 @@ function App() {
         salvar = {salvar}
         teclaSalvar= {teclaSalvar}
         verificarEdicao = {verificarEdicao}
+        inputEdicao = {inputEdicao}
         />
       </div> 
 
