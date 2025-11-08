@@ -106,27 +106,21 @@ function App() {
 
 
   //! MUDA O ESTADO SE TEM ALGUMA TAREFA SENDO EDITADA  (Tarefa.jsx)
-  function mudancaEdicao(idTarefa, conteudoTarefa, inputEdicao) {
-    if(tarefaEmEdicao === null){
-      const tarefa = listaDeTarefas.find(t => t.id === idTarefa);
-      if (!tarefa) return;
+  function mudancaEdicao(idTarefa) {
+    const tarefa = listaDeTarefas.find(t => t.id === idTarefa);
+    if (!tarefa) return;
     
-      if (tarefaEmEdicao === idTarefa) {
-        if (conteudoTarefa.trim() === "") {
-          alert("A sua tarefa está vazia, digite algo!");
-          return;
-        }
-        setTarefaEmEdicao(null);
-        return;
-      }
-      setTarefaEmEdicao(idTarefa);
-      setTimeout(() => inputEdicao.current.focus(), 10)
-    } else{
-      alert("Já tem uma tarefa sendo editada, termine de editar ela para editar outra!");
+    if (tarefaEmEdicao !== null && tarefaEmEdicao !== idTarefa){
+      alert("Termine de editar a tarefa atual antes de editar outra!")
       return;
     }
 
-    
+    if (tarefaEmEdicao === idTarefa){
+      salvar(tarefa.texto);
+      return;
+    }
+
+    setTarefaEmEdicao(idTarefa);
 }
 
 
@@ -146,22 +140,23 @@ function App() {
     const tarefa = listaDeTarefas.find(t => t.id === idTarefa);
     if(!tarefa) return ''; 
 
-    return tarefaEmEdicao === idTarefa ? '✅' : '✏️'
+    return tarefaEmEdicao === idTarefa ? '✅' : '✏️';
   }
+
 
   //! SALVA A TAREFA COM VALOR DEIXADO DEPOIS DA EDIÇÃO (Tarefa.jsx)
   function salvar(conteudoTarefa){
           conteudoTarefa.trim() === '' 
-          ? (alert('A sua tarefa está vazia, digite algo!'), setTimeout(() => inputEdicao.current.focus(), 50))
-          : setTimeout(() => setTarefaEmEdicao(null), 300)
+          ? (alert('A sua tarefa está vazia, digite algo!'), setTimeout(() => inputEdicao.current.focus(), 0))
+          : setTarefaEmEdicao(null);
       }
 
 
   //! SALVA A TAREFA COM O VALOR DEIXADO APÓS A EDIÇÃO POR MEIO DO TECLADO  (Tarefa.jsx) 
-  function teclaSalvar(tecla){
+  function teclaSalvar(tecla, conteudoTarefa){
     if(tecla.key === 'Enter'){
       tecla.preventDefault();
-      tecla.target.blur();
+      salvar(conteudoTarefa);
     }
   }
 
@@ -173,9 +168,9 @@ function App() {
       type="text" 
       value={tarefa.texto} 
       ref={inputEdicao}
+      autoFocus={true}
       onChange={(texto) => editarTarefa(tarefa.id, texto.target.value)}
       onKeyDown={(tecla) => teclaSalvar(tecla, tarefa.texto)}
-      onBlur={() => salvar(tarefa.texto)}
       />
     ) : (
       <p>{tarefa.texto}</p>
@@ -238,7 +233,6 @@ function App() {
         salvar = {salvar}
         teclaSalvar= {teclaSalvar}
         verificarEdicao = {verificarEdicao}
-        inputEdicao = {inputEdicao}
         />
       </div> 
 

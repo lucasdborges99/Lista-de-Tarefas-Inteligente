@@ -7,8 +7,7 @@ function Tarefa({
     marcarTarefaConcluida,
     mudancaEdicao,
     mudarBotao,
-    verificarEdicao,
-    inputEdicao})
+    verificarEdicao})
 {
     
 
@@ -56,7 +55,7 @@ function Tarefa({
                         {verificarEdicao(tarefa)}
                     </div>
                     <div className="btnExcluirEditar">
-                        <button onClick={() => mudancaEdicao(tarefa.id, tarefa.texto, inputEdicao)} className="editar" >{mudarBotao(tarefa.id)}</button>
+                        <button onClick={() => mudancaEdicao(tarefa.id)} className="editar" >{mudarBotao(tarefa.id)}</button>
                         <button  onClick={() => removerTarefaDaLista(tarefa.id)} className="excluir">🗑️</button>
                     </div>
                 </div>
