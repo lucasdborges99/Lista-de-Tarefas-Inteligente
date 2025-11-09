@@ -7,8 +7,8 @@ export function useTarefas(){
     const[listaDeTarefas, setListaDeTarefas] = useState([]);
     const[select, setSelect] = useState('');
     const[catColor, setCatColor] = useState('black');
-    const carregamentoIncial = useRef(true);  
     const[tarefaEmEdicao, setTarefaEmEdicao] = useState(null);
+    const carregamentoIncial = useRef(true);  
     const inputTarefa = useRef(null);
     const inputEdicao = useRef(null);
 
@@ -137,7 +137,6 @@ export function useTarefas(){
             salvar(conteudoTarefa);
         }
     }
-
 
 
 
