@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import Header from "./components/Header";
 import ListaTarefas from "./components/ListaTarefas";
-import Filtro from "./components/Filtro";
 import { useTarefas } from "./hooks/useTarefas";
 import "./styles/App.css";
 
@@ -10,7 +9,7 @@ function App() {
     mudancaInput,
     addTarefaNaLista,
     addTarefaEnter,
-    mudancaSelect,
+    mudancaSelectCategoria,
     removerTarefaDaLista,
     marcarTarefaConcluida,
     mudancaEdicao,
@@ -57,18 +56,10 @@ function App() {
         mudancaInput={mudancaInput}
         addTarefaNaLista={addTarefaNaLista}
         select={select}
-        mudancaSelect={mudancaSelect}
+        mudancaSelectCategoria={mudancaSelectCategoria}
         catColor={catColor}
         addTarefaEnter={addTarefaEnter}
         inputTarefa={inputTarefa}
-      />
-      <Filtro
-      
-      
-      
-      
-      
-      
       />
       <ListaTarefas
         listaDeTarefas={listaDeTarefas}

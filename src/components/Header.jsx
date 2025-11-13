@@ -5,7 +5,7 @@ function Header({
   mudancaInput,
   addTarefaNaLista,
   select,
-  mudancaSelect,
+  mudancaSelectCategoria,
   catColor,
   addTarefaEnter,
   inputTarefa,
@@ -27,7 +27,7 @@ function Header({
             ref={inputTarefa}
           />
           <select
-            onChange={mudancaSelect}
+            onChange={mudancaSelectCategoria}
             onKeyDown={addTarefaEnter}
             value={select}
             style={{ color: catColor }}

@@ -55,18 +55,33 @@ export function useTarefas(){
     }
 
 
-    function mudancaSelect(mudanca) {
+    function mudancaSelectCategoria(mudanca) {
         setSelect(mudanca.target.value);
 
         switch (mudanca.target.value) {
-            case "trabalho" : setCatColor("rgb(35, 35, 204)");
-            case "pessoal" : setCatColor("crimson");
-            case "estudos" : setCatColor("rgb(218, 186, 7)");
-            case "casa" : setCatColor("rgb(100, 44, 7)");
-            case "lazer" : setCatColor("orangered");
-            case "financas" : setCatColor("green");
-            case "projetos" : setCatColor("rgb(47, 167, 155)");
-            default : setCatColor("black");
+            case "trabalho" :
+              setCatColor("rgb(35, 35, 204)");
+              break;
+            case "pessoal" : 
+              setCatColor("crimson");
+              break;
+            case "estudos" : 
+              setCatColor("rgb(218, 186, 7)");
+              break;
+            case "casa" : 
+              setCatColor("rgb(100, 44, 7)");
+              break;
+            case "lazer" : 
+              setCatColor("orangered");
+              break;
+            case "financas" : 
+              setCatColor("green");
+              break;
+            case "projetos" : 
+              setCatColor("rgb(47, 167, 155)");
+              break;
+            default : 
+              setCatColor("black");
         }
     }
 
@@ -173,7 +188,7 @@ export function useTarefas(){
       mudancaInput,
       addTarefaNaLista,
       addTarefaEnter,
-      mudancaSelect,
+      mudancaSelectCategoria,
       removerTarefaDaLista,
       marcarTarefaConcluida,
       mudancaEdicao,
